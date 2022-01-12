@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CoronavirusTracjerApplication {
+public class CoronavirusTrackerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CoronavirusTracjerApplication.class, args);
+		SpringApplication.run(CoronavirusTrackerApplication.class, args);
 	}
 
 }
