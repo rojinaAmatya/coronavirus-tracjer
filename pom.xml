@@ -11,7 +11,7 @@
 	<groupId>io.javabrains</groupId>
 	<artifactId>coronavirus-tracjer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>coronavirus-tracjer</name>
+	<name>coronavirus-tracker</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>

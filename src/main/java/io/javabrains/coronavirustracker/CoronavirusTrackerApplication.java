@@ -1,8 +1,9 @@
-package io.javabrains.coronavirustracjer;
+package io.javabrains.coronavirustracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
+
 
 @SpringBootApplication
 @EnableScheduling //spring knows needs to run the schedule
