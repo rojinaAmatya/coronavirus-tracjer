@@ -1,6 +1,7 @@
 package io.javabrains.coronavirustracker.services;
 
 import io.javabrains.coronavirustracker.modules.LocationStats;
+import lombok.Getter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,6 +22,7 @@ public class CoronaVirusDataService {
 
     private static String VIRUS_DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 
+    @Getter
     private List<LocationStats> allStats = new ArrayList<>();
     @PostConstruct   //s m h d m y
     @Scheduled(cron = "* * 1 * * *") //offers to run method on a regular basis
@@ -39,8 +41,6 @@ public class CoronaVirusDataService {
             locationStats.setState(record.get("Province/State"));
             locationStats.setCountry(record.get("Country/Region"));
             locationStats.setLatestTotalCases(Integer.parseInt(record.get(record.size()-1)));
-
-            System.out.println(locationStats);
             newStats.add(locationStats);
 
         }
