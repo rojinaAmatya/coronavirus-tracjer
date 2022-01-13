@@ -1,10 +1,10 @@
-package io.javabrains.coronavirustracjer;
+package io.javabrains.coronavirustracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CoronavirusTracjerApplicationTests {
+class CoronavirusTrackerApplicationTests {
 
 	@Test
 	void contextLoads() {

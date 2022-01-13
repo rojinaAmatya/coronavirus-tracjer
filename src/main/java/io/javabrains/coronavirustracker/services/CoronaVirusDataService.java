@@ -1,6 +1,7 @@
-package io.javabrains.coronavirustracjer.services;
+package io.javabrains.coronavirustracker.services;
 
-import io.javabrains.coronavirustracjer.modules.LocationStats;
+import io.javabrains.coronavirustracker.modules.LocationStats;
+import lombok.Getter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -22,8 +22,9 @@ public class CoronaVirusDataService {
 
     private static String VIRUS_DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
 
+    @Getter
     private List<LocationStats> allStats = new ArrayList<>();
-    @PostConstruct
+    @PostConstruct   //s m h d m y
     @Scheduled(cron = "* * 1 * * *") //offers to run method on a regular basis
     public void fetchVirusData() throws IOException, InterruptedException {
         List<LocationStats> newStats = new ArrayList<>();
@@ -36,8 +37,14 @@ public class CoronaVirusDataService {
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvBodyReader);
 
         for (CSVRecord record : records) {
-            String state = record.get("Province/State");
-            System.out.println(state);
+            LocationStats locationStats = new LocationStats();
+            locationStats.setState(record.get("Province/State"));
+            locationStats.setCountry(record.get("Country/Region"));
+            locationStats.setLatestTotalCases(Integer.parseInt(record.get(record.size()-1)));
+            newStats.add(locationStats);
+
         }
+
+        this.allStats = newStats;
     }
 }
